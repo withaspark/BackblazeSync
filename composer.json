@@ -1,0 +1,21 @@
+{
+    "name": "withaspark/backblaze-sync",
+    "description": "A script for syncing files to Backblaze B2.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stephen Parker",
+            "email": "web@withaspark.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "withaspark\\BackblazeSync": "src/"
+        },
+        "psr-4": {
+            "withaspark\\BackblazeSync\\": "src/"
+        }
+    }
+}
