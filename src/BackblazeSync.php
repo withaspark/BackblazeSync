@@ -163,7 +163,7 @@ class BackblazeSync
     protected function deleteFileVersion(string $file_id): void
     {
         echo "\nDeleting " . $file_id;
-        shell_exec(sprintf('b2 delete-file-version "%s"', $file_id));
+        shell_exec(sprintf('b2 delete-file-version %s', escapeshellarg($file_id)));
 
         $this->count_deleted++;
     }
@@ -205,7 +205,7 @@ class BackblazeSync
         $next = '';
 
         do {
-            $result = json_decode(shell_exec(sprintf('b2 list-file-names "%s" "%s" "%d"', $this->bucket, $next, 1000)));
+            $result = json_decode(shell_exec(sprintf('b2 list-file-names %s %s %d', escapeshellarg($this->bucket), escapeshellarg($next), 1000)));
 
             if (! is_object($result)) {
                 if ($result === false) {
@@ -255,7 +255,7 @@ class BackblazeSync
         }
 
         if ($force || ! $this->isAlreadyUploaded($file)) {
-            $result = shell_exec(sprintf('b2 upload-file --sha1 "%s" --info sha1="%s" "%s" "%s" "%s"', $file->getHash(), $file->getHash(), $this->bucket, $file->getUrl(), $as));
+            $result = shell_exec(sprintf('b2 upload-file --sha1 %s --info sha1=%s %s %s %s', escapeshellarg($file->getHash()), escapeshellarg($file->getHash()), escapeshellarg($this->bucket), escapeshellarg($file->getUrl()), escapeshellarg($as)));
 
             $this->count_uploaded++;
         }
