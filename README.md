@@ -3,7 +3,15 @@
 ## Install
 
 1. Install B2 CLI following [these instructions](https://www.backblaze.com/b2/docs/quick_command_line.html).
-2. Install package.
+2. Authorize B2 CLI.
+   1. Login to Backblaze UI.
+   2. Visit buckets page and create new application key (or use existing).
+   3. Get values of `applicationKeyId` and `applicationKey` from the `keyId` and displayed value, respectively.
+   4. In terminal, authorize account by substituting for `applicationKeyId` and `applicationKey`.
+      ```sh
+      b2 authorize-account <applicationKeyId> <applicationKey>
+      ```
+3. Install package.
    ```sh
    composer require withaspark/BackblazeSync
    ```
